@@ -1,4 +1,3 @@
-/**************** FIREBASE SETUP ****************/
 
 const firebaseConfig = {
   apiKey: "AIzaSyD58LEPZQLvhA7ZJB_L5kTgEXWnZ3hTRW4",
@@ -16,11 +15,9 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const slotsRef = database.ref("ParkingSlots");
 
-/**************** SLOT DATA ****************/
 
 let slots = [];
 
-/* Static slot → location mapping */
 function getSlotLocation(slotId) {
   const locations = {
     "Slot1": { lat: 18.4638, lng: 73.8682 },
@@ -32,7 +29,6 @@ function getSlotLocation(slotId) {
   return locations[slotId];
 }
 
-/**************** UI HELPERS ****************/
 
 function getStatusDetails(status) {
   if (status === "available") {
@@ -41,7 +37,6 @@ function getStatusDetails(status) {
   return { cls: "status-occupied", text: "Occupied" };
 }
 
-/**************** SLOT LIST ****************/
 
 function loadParkingSlots() {
   const list = document.getElementById("slotList");
@@ -64,7 +59,6 @@ function loadParkingSlots() {
   });
 }
 
-/**************** GOOGLE MAP ****************/
 
 let map;
 let markers = [];
@@ -99,7 +93,6 @@ function updateMapMarkers() {
   });
 }
 
-/**************** FIREBASE LISTENER ****************/
 
 function listenToSlots() {
   slotsRef.on("value", (snapshot) => {
@@ -117,7 +110,6 @@ function listenToSlots() {
   });
 }
 
-/**************** START ****************/
 
 window.onload = () => {
   listenToSlots();
